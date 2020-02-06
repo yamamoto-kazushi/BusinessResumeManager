@@ -30,6 +30,7 @@ class CreateUsersTable extends Migration
             $table->string('email',200)->unique()->comment('メールアドレス');
             $table->string('password',30)->comment('パスワード');
             $table->integer('login_failed')->comment('ログイン失敗回数');
+            $table->boolean('admin_flag')->defalut(false)->comment('管理者フラグ');
             $table->dateTime('last_login_datetime')->nullable(true)->comment('最終ログイン日時');
             $table->dateTime('last_update_datetime')->nullable(true)->comment('最終更新日時');
             $table->boolean('delete_flag')->defalut(false)->comment('削除フラグ');
