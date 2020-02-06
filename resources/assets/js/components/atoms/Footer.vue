@@ -1,7 +1,7 @@
 <template>
     <div class="container">
-        <div class="row">
-        <div>© 2020 IDEAL Architects Co., Ltd.</div>
+        <div class="row footer-title">
+        <div class="col-12">© 2020 IDEAL Architects Co., Ltd.</div>
         </div>
     </div>
 </template>
@@ -15,7 +15,7 @@
     }
 </script>
 <style scoped lang="scss">
-.row {
+.footer-title {
     text-align: center
 }
 

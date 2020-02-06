@@ -1,7 +1,7 @@
 <template>
     <div class="container">
-        <div class="row">
-        <h1>業務経歴書管理システム</h1>
+        <div class="row header-title">
+            <h1 class="col-12">業務経歴書管理システム</h1>
         </div>
     </div>
 </template>
@@ -15,7 +15,7 @@
     }
 </script>
 <style scoped lang="scss">
-.row {
+.header-title {
     text-align: center
 }
 </style>

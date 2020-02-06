@@ -15,13 +15,20 @@ window.Vue = require('vue');
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
-import router from './router'
+import router from './router';
+import store from './store/index';
+import BootstrapVue from 'bootstrap-vue';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import 'bootstrap-vue/dist/bootstrap-vue.css';
+
+Vue.use(BootstrapVue);
+
 Vue.component('vue-component', require('./components/pages/Index.vue'));
 Vue.component('vue-header', require('./components/atoms/Header.vue'));
 Vue.component('vue-footer', require('./components/atoms/Footer.vue'));
 
 const app = new Vue({
     router,
-    // render: h => h(app),
+    store,
     el: '#app'
 });

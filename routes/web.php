@@ -17,3 +17,6 @@ Route::get('/', function () {
     Route::get('/next', function () {
         return view('index');
     });
+        Route::get('/login', function () {
+            return view('index');
+        });
