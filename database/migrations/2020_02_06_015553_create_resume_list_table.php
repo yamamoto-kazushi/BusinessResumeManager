@@ -38,7 +38,8 @@ class CreateResumeListTable extends Migration
             $table->integer('team_size')->comment('チーム開発規模（人数）');
             $table->string('os')->comment('OS,DB');
             $table->text('lang')->comment('言語');
-            $table->text('mw')->comment('フレームワーク');
+            $table->text('mw')->comment('M/W');
+            $table->text('fw')->comment('フレームワーク');
             $table->text('tool')->comment('ツール');
             $table->dateTime('last_update_datetime')->nullable(true)->comment('最終更新日時');
             $table->boolean('delete_flag')->defalut(false)->comment('削除フラグ');

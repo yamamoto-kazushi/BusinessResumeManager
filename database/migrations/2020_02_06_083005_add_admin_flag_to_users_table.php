@@ -15,7 +15,7 @@ class AddAdminFlagToUsersTable extends Migration
     {
         Schema::table('users', function (Blueprint $table) {
             //
-            $table->boolean('admin_flag')->defalut(false)->comment('管理者フラグ');
+//             $table->boolean('admin_flag')->defalut(false)->comment('管理者フラグ');
         });
     }
 
