@@ -12,7 +12,20 @@ export default new Vuex.Store({
   mutations,
 
   state: {
+      name: "",
+      nameKana: "",
+      birthday: "",
+      email: "",
       emproyeeNumber: "",
-      password: ""
+      password: "",
+      gender: "",
+      address: "",
+      country: "",
+      initial: "",
+      education: "",
+      graduate: "",
+      station: "",
+      qualifiations: "",
+
   }
 });

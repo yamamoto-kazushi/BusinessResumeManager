@@ -3,13 +3,13 @@
         <div class="row">
             <h2 class="col-12">ログイン</h2>
             <input-text
-                item-name="社員番号"
+                item-name="メールアドレス"
                 input-type="text"
-                input-name="emproyeeNumber"
+                input-name="email"
                 input-value=""
-                :maxlength="5"
-                setter-name="setEmproyeeNumber"
-                placeholder="A9999"
+                :maxlength="200"
+                setter-name="setEmail"
+                placeholder="a_bbbbbb@ideal-architects.co.jp"
                 class="offset-2 col-10"
             />
             <input-text
@@ -17,7 +17,7 @@
                 input-type="password"
                 input-name="password"
                 input-value=""
-                :maxlength="20"
+                :maxlength="30"
                 setter-name="setPassword"
                 placeholder="***********"
                 class="offset-2 col-10"
@@ -53,6 +53,6 @@ import InputText from '../atoms/InputText'
     width: 12rem;
 }
 .container {
-    font-size: 150%;
+    font-size: 14px;
 }
 </style>

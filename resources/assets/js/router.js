@@ -3,6 +3,7 @@ import Router from 'vue-router'
 import Index from './components/pages/Index.vue'
 import NextPage from './components/pages/NextPage.vue'
 import LoginPage from './components/pages/LoginPage.vue'
+import ResumePage from './components/pages/ResumePage.vue'
 
 Vue.use(Router)
 
@@ -19,11 +20,15 @@ export default new Router({
       name: 'next',
       component: NextPage
     },
-    ,
     {
       path: '/login',
       name: 'login',
       component: LoginPage
+    },
+    {
+      path: '/resume',
+      name: 'resume',
+      component: ResumePage
     }
   ]
 })

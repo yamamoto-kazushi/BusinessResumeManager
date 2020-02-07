@@ -1,6 +1,3 @@
-<?php
-phpinfo();
-?>
 <!doctype html>
 <html lang="{{ app()->getLocale() }}">
     <head>
@@ -16,6 +13,7 @@ phpinfo();
     <body>
         <div id="app">
 		<vue-header></vue-header>
+<!--         <router-view logout="{{ route('logout') }}"></router-view> -->
         <router-view></router-view>
 		<vue-footer></vue-footer>
 		</div>

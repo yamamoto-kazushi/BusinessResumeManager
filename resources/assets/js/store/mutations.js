@@ -6,5 +6,11 @@ export const mutations = {
     },
     setPassword(state, value)  {
         state.password = value
+    },
+    setEmail(state, value)  {
+        state.email= value
+    },
+    setBirthday(state, value)  {
+        state.birthday= value
     }
 }
