@@ -28,7 +28,7 @@ class CreateUsersTable extends Migration
             $table->string('station',50)->comment('最寄駅');
             $table->text('qualifications')->nullable(true)->comment('資格');
             $table->string('email',200)->unique()->comment('メールアドレス');
-            $table->string('password',30)->comment('パスワード');
+            $table->string('password')->comment('パスワード');
             $table->integer('login_failed')->comment('ログイン失敗回数');
             $table->boolean('admin_flag')->defalut(false)->comment('管理者フラグ');
             $table->dateTime('last_login_datetime')->nullable(true)->comment('最終ログイン日時');

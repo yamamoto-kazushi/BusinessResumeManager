@@ -33,7 +33,7 @@ class CreateResumeListTable extends Migration
             $table->boolean('work_om_flag')->default(false)->comment('担当区分_保守フラグ');
             $table->boolean('work_other_flag')->default(false)->comment('担当区分_その他フラグ');
             $table->string('system',20)->comment('システム');
-            $table->boolean('type')->comment('形態');
+            $table->string('type',20)->comment('形態');
             $table->integer('whole_size')->comment('PJ全体規模（人数）');
             $table->integer('team_size')->comment('チーム開発規模（人数）');
             $table->string('os')->comment('OS,DB');
