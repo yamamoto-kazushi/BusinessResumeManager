@@ -13,7 +13,7 @@ class CreateResumeListTable extends Migration
      */
     public function up()
     {
-        Schema::create('resume_list', function (Blueprint $table) {
+        Schema::create('resume_lists', function (Blueprint $table) {
             $table->integer('id')->comment('サロゲートキー');
             $table->string('emproyee_no', 6)->comment('社員番号');
             $table->string('name',100)->comment('氏名');
@@ -46,6 +46,10 @@ class CreateResumeListTable extends Migration
             $table->timestamps();
             $table->primary(['id', 'emproyee_no']);
         });
+
+            Schema::table('resume_lists', function (Blueprint $table) {
+                $table->increments('id')->change();
+            });
     }
 
     /**
