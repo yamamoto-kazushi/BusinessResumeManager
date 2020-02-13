@@ -19,6 +19,7 @@ use Illuminate\Http\Request;
 
 Route::group(['middleware' => ['api']], function () {
     Route::get('resumes', 'Api\ResumeController@index');
+    Route::get('resumes/{id}', 'Api\ResumeController@index');
     Route::post('resumes', 'Api\ResumeController@create');
     Route::put('resumes', 'Api\ResumeController@update');
 });
