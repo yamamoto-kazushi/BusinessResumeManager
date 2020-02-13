@@ -6,12 +6,12 @@
         <label v-if="this.isRequired" class="required-label col-1">【必須】</label>
         <div v-else class="col-1"></div>
             <div class="col-5">
-                <input
-                    :type="this.inputType"
+                <textarea
                     :name="this.inputName"
                     :value="this.inputValue"
-                    :maxlength="this.maxlength"
                     :placeholder="this.placeholder"
+                    rows="4"
+                    cols="4"
                     @input="input"
                     class="form-control"
                 />
@@ -21,13 +21,9 @@
 
 <script>
     export default {
-        name:"InputText",
+        name:"InputTextArea",
         props: {
             itemName: {
-                type: String,
-                required: true
-            },
-            inputType: {
                 type: String,
                 required: true
             },
@@ -37,9 +33,6 @@
             },
             inputValue: {
                 required: true
-            },
-            maxlength: {
-                type: Number
             },
             placeholder: {
                 type: String

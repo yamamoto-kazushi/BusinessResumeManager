@@ -20,9 +20,12 @@ Route::get('/next', function () {
 Route::get('/login', function () {
     return view('index');
 });
-    Route::get('/resume', function () {
-        return view('index');
-    });
+Route::get('/resume', function () {
+    return view('index');
+});
+Route::get('/edit', function () {
+    return view('index');
+});
 
 Auth::routes();
 
@@ -30,4 +33,5 @@ Auth::routes();
     Route::post('/login', 'Auth\LoginController@login');
     Route::post('/logout', 'Auth\LoginController@logout')->name('logout');
 
-Route::get('/home', 'HomeController@index')->name('home');
+Route::post('/user', 'Api\UserController@store')->name('store');
+Route::get('/user', 'Api\UserController@index')->name('index')->middleware('auth');

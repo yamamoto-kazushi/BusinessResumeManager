@@ -8,10 +8,7 @@
 
 <script>
     export default {
-        name:"Header",
-        mounted() {
-            console.log('Component mounted.')
-        }
+        name:"Footer"
     }
 </script>
 <style scoped lang="scss">

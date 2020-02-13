@@ -29,6 +29,11 @@ export default new Router({
       path: '/resume',
       name: 'resume',
       component: ResumePage
+    },
+    {
+      path: '/edit',
+      name: 'edit',
+      component: ResumePage
     }
   ]
 })

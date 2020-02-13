@@ -1,14 +1,16 @@
 <template>
     <div class="input-text-div form-group row">
         <label class="input-text-name col-2">
-            {{ this.itemName}}
+            {{this.itemName}}
         </label>
         <label v-if="this.isRequired" class="required-label col-1">【必須】</label>
-        <select v-model="value" class="form-control col-2" @change="input">
-            <option v-for="item in itemList" :value="item.value">
+        <div class="col-3">
+        <select v-model="value" class="form-control" @change="input">
+            <option v-for="item in this.itemList" :value="item.value" :key="item.value">
             {{ item.name  }}
             </option>
         </select>
+        </div>
     </div>
 </template>
 
@@ -42,7 +44,7 @@
                 default: 1
             }
         },
-        mountet: function() {
+        mounted: function() {
             if (this.defaultValue) {
                 this.value = this.defaultValue;
             }

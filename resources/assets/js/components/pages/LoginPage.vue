@@ -36,9 +36,6 @@ import InputText from '../atoms/InputText'
         name:"LoginPage",
         components: {
             InputText
-        },
-        mounted() {
-            console.log('Component mounted.')
         }
     }
 </script>

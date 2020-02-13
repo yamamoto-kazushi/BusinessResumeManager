@@ -4,21 +4,23 @@
             {{ this.itemName}}
         </label>
         <label v-if="this.isRequired" class="required-label col-1">【必須】</label>
-        <select v-model="year" class="form-control col-2" @change="get_days">
-            <option v-for="n in 70" :value="n + 1950">
-            {{ n + 1950 }}
-            </option>
-        </select>年
-        <select v-model="month" class="form-control col-1" @change="get_days">
-            <option v-for="n in 12" :value="n">
-            {{ n }}
-            </option>
-        </select>月
-        <select v-model="day" class="form-control col-1" @change="get_days">
-            <option v-for="n in daysMax" :value="n">
-            {{ n }}
-            </option>
-        </select>日
+        <div class="input-date col-7 row">
+            <select v-model="year" class="form-control col-2" @change="getDays">
+                <option v-for="n in 70" :value="n + 1950">
+                {{ n + 1950 }}
+                </option>
+            </select>年
+            <select v-model="month" class="form-control col-2" @change="getDays">
+                <option v-for="n in 12" :value="n">
+                {{ n }}
+                </option>
+            </select>月
+            <select v-model="day" class="form-control col-2" @change="getDays">
+                <option v-for="n in daysMax" :value="n">
+                {{ n }}
+                </option>
+            </select>日
+        </div>
     </div>
 </template>
 
@@ -46,11 +48,24 @@
                 type: Boolean,
                 required: true,
                 defalut: false
+            },
+            defaultValue: {
+                required: false
+            }
+        },
+        mounted: function() {
+            if (this.defaultValue) {
+                const strSplit = this.defaultValue.split('-');
+                this.year = strSplit[0];
+                this.month= strSplit[1];
+                this.getDays();
+                this.day = strSplit[2];
+                this.value = this.defaultValue;
             }
         },
         methods: {
-            get_days() {
-                const date = this.year +'/'+ this.month +'/'+ this.day +'/';
+            getDays() {
+                const date = this.year +'-'+ this.month +'-'+ this.day;
                 this.daysMax = new Date(this.year, this.month, 0).getDate();
                 this.$store.commit(this.setterName, date);
             }
@@ -64,6 +79,8 @@
 .required-label {
     color:red;
     font-size: 10px;
-    padding: 0 !important;
+}
+.input-date {
+    margin-left: 0;
 }
 </style>
