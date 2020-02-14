@@ -80,6 +80,7 @@ export default new Vuex.Store({
         mw: "",
         fw: "",
         tool: ""
-    }
+    },
+    userList: []
   }
 });

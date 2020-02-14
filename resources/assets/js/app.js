@@ -20,8 +20,13 @@ import store from './store/index';
 import BootstrapVue from 'bootstrap-vue';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap-vue/dist/bootstrap-vue.css';
+import ElementUI from 'element-ui'
+import locale from 'element-ui/lib/locale/lang/ja'
+import 'element-ui/lib/theme-chalk/index.css'
+import 'element-ui/lib/theme-chalk/display.css'
 
 Vue.use(BootstrapVue);
+Vue.use(ElementUI, { locale })
 
 Vue.component('vue-component', require('./components/pages/Index.vue'));
 Vue.component('vue-header', require('./components/atoms/Header.vue'));

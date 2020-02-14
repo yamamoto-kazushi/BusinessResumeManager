@@ -57,5 +57,8 @@ export default {
     },
     setAdminFlag(state, value) {
         state.adminFlag = value;
+    },
+    setUserList(state, value) {
+        state.userList = value;
     }
 }

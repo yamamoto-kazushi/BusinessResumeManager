@@ -47,7 +47,7 @@
         />
         <input-check-box
             item-name="作業区分"
-            :input-data-list="this.workDivList"
+            :input-data-list="getworkDivList(this.no)"
             :setter-no="this.no"
             :is-required="true"
             class="offset-2 col-10"
@@ -56,7 +56,7 @@
             item-name="システム"
             input-type="text"
             input-name="system"
-            input-value=""
+            :input-value="this.$store.getters.getWorkList({no: this.no -1, name: 'system'})"
             :maxlength="20"
             :setter-no="this.no"
             setter-name="system"
@@ -68,7 +68,7 @@
             item-name="形態"
             input-type="text"
             input-name="type"
-            input-value=""
+            :input-value="this.$store.getters.getWorkList({no: this.no -1, name: 'type'})"
             :maxlength="20"
             :setter-no="this.no"
             setter-name="type"
@@ -80,7 +80,7 @@
             item-name="PJ全体規模(人数)"
             input-type="text"
             input-name="wholeSize"
-            input-value=""
+            :input-value="this.$store.getters.getWorkList({no: this.no -1, name: 'wholeSize'})"
             :maxlength="5"
             :setter-no="this.no"
             setter-name="wholeSize"
@@ -92,7 +92,7 @@
             item-name="チーム規模(人数)"
             input-type="text"
             input-name="teamSize"
-            input-value=""
+            :input-value="this.$store.getters.getWorkList({no: this.no -1, name: 'teamSize'})"
             :maxlength="5"
             :setter-no="this.no"
             setter-name="teamSize"
@@ -103,7 +103,7 @@
         <input-text-area
             item-name="OS/DB"
             input-name="os"
-            input-value=""
+            :input-value="this.$store.getters.getWorkList({no: this.no -1, name: 'os'})"
             :setter-no="this.no"
             setter-name="os"
             placeholder="Windows 10, MySQL"
@@ -113,7 +113,7 @@
         <input-text-area
             item-name="言語"
             input-name="lang"
-            input-value=""
+            :input-value="this.$store.getters.getWorkList({no: this.no -1, name: 'lang'})"
             :setter-no="this.no"
             setter-name="lang"
             placeholder="Java,HTML,Javascript(Vue、React、JQuery),SQL"
@@ -123,7 +123,7 @@
         <input-text-area
             item-name="M/W"
             input-name="mw"
-            input-value=""
+            :input-value="this.$store.getters.getWorkList({no: this.no -1, name: 'mw'})"
             :setter-no="this.no"
             setter-name="mw"
             placeholder="SVN,Git,AWS"
@@ -133,7 +133,7 @@
         <input-text-area
             item-name="フレームワーク"
             input-name="fw"
-            input-value=""
+            :input-value="this.$store.getters.getWorkList({no: this.no -1, name: 'fw'})"
             :setter-no="this.no"
             setter-name="fw"
             placeholder="ZendFramework2,Laravel,Spring Framework"
@@ -143,7 +143,7 @@
         <input-text-area
             item-name="ツール"
             input-name="tool"
-            input-value=""
+            :input-value="this.$store.getters.getWorkList({no: this.no -1, name: 'tool'})"
             :setter-no="this.no"
             setter-name="tool"
             placeholder="Eclipse,Visual Studio,Redmine,A5M2,Cisco VPN Client,Tera Term"
@@ -175,49 +175,41 @@ import InputCheckBox from '../atoms/InputCheckBox'
                         name: "1.計画調査分析",
                         checked: false,
                         setterName: "workResearchFlag",
-                        checked: this.$store.state.workResearchFlag
                     },
                     {
                         name: "2.要件定義",
                         checked: false,
                         setterName: "workRequirementFlag",
-                        checked: this.$store.state.workRequirementFlag
                     },
                     {
                         name: "3.基本設計",
                         checked: false,
                         setterName: "workBdFlag",
-                        checked: this.$store.state.workBdFlag
                     },
                     {
                         name: "4.詳細設計",
                         checked: false,
                         setterName: "workDdFlag",
-                        checked: this.$store.state.workDdFlag
                     },
                     {
                         name: "5.製造/構築",
                         checked: false,
                         setterName: "workPgFlag",
-                        checked: this.$store.state.workPgFlag
                     },
                     {
                         name: "6.テスト",
                         checked: false,
                         setterName: "workTFlag",
-                        checked: this.$store.state.workTFlag
                     },
                     {
                         name: "7.保守",
                         checked: false,
                         setterName: "workOmFlag",
-                        checked: this.$store.state.workOmFlag
                     },
                     {
                         name: "8.その他",
                         checked: false,
                         setterName: "workOtherFlag",
-                        checked: this.$store.state.workOtherFlag
                     }
                 ]
             }
@@ -230,8 +222,13 @@ import InputCheckBox from '../atoms/InputCheckBox'
         },
         methods: {
             input(e) {
-                console.log(e);
                 this.$store.commit(this.setterName, e.target.value);
+            },
+            getworkDivList(no) {
+                this.workDivList.map((item) => {
+                    item.checked = this.$store.getters.getWorkList({no: no -1, name: item.setterName})
+                })
+                return this.workDivList
             }
         }
     }

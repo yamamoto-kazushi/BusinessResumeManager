@@ -26,6 +26,9 @@ Route::get('/resume', function () {
 Route::get('/edit', function () {
     return view('index');
 });
+    Route::get('/list', function () {
+        return view('index');
+    });
 
 Auth::routes();
 
@@ -35,3 +38,7 @@ Auth::routes();
 
 Route::post('/user', 'Api\UserController@store')->name('store');
 Route::get('/user', 'Api\UserController@index')->name('index')->middleware('auth');
+Route::post('/user/{id}', 'Api\UserController@update')->name('update')->middleware('auth');
+Route::get('/user/list', 'Api\UserController@userList')->name('list')->middleware('auth');
+Route::get('/user/{id}', 'Api\UserController@show')->name('show')->middleware('auth');
+Route::delete('/user/{id}', 'Api\UserController@destroy')->name('destroy')->middleware('auth');

@@ -3,8 +3,7 @@ import axios from 'axios';
 const baseUrl = 'http://localhost/'
 
 export default {
-    submitUserData({ state }) {
-        const url = 'user'
+    submitUserData({ state }, router) {
         let formData = new FormData();
         formData.append('name', state.name);
         formData.append('nameKana', state.nameKana);
@@ -23,20 +22,37 @@ export default {
         formData.append('adminFlag', state.adminFlag);
         formData.append('workList', JSON.stringify(state.workList));
 
-        asyncSubmit(url, formData)
-            .then(() => {
-                console.log('登録/変更に成功しました！');
-                alert('登録/変更に成功しました！');
-            })
-            .catch(response => {
-                console.log(response);
-                console.log('登録/変更に失敗しました！');
-                alert('登録/変更に失敗しました！');
-            });
+        if (state.editFlag) {
+            const url = 'user/' + state.emproyeeNumber
+            asyncPut(url, formData)
+                .then((response) => {
+                    if (response.resulet) {
+                             alert(response.message)
+                            router.push('/')
+                        } else {
+                            alert(response.message)
+                        }
+                })
+                .catch(response => {
+                    console.log(response);
+                    alert('変更に失敗しました！');
+                });
+
+        } else {
+            const url = 'user'
+            asyncPost(url, formData)
+                .then(() => {
+                    alert('登録に成功しました！');
+                })
+                .catch(response => {
+                    console.log(response);
+                    alert('登録に失敗しました！');
+                });
+        }
     },
     redirect({ commit }, router) {
-        const url = baseUrl +'user'
-        asyncRequest(url)
+        const url = 'user'
+        asyncGet(url)
         .then((response) => {
             console.log(response)
             // 管理者でない場合、データをvuexに設定して編集画面へ遷移
@@ -44,6 +60,22 @@ export default {
                 setUserData(commit,response.user, response.ex);
                 commit('setEditFlag', true);
                 router.push('/edit')
+            } else {
+                const url = 'user/list'
+                asyncGet(url)
+                    .then((response) => {
+                        if (response.result) {
+                            commit('setUserList', response.list)
+                        } else {
+                            console.log(response.message)
+                        }
+                        router.push('/list')
+                    })
+                    .catch(response => {
+                        console.log(response);
+                        alert('変更に失敗しました！');
+                    });
+
             }
 
         })
@@ -51,18 +83,55 @@ export default {
             console.log(response);
             console.log('ログインユーザ情報取得に失敗しました')
         })
+    },
+    selectUserEdit({commit}, selectData) {
+        const selectUser = selectData.user
+        const router = selectData.router
+        const url = 'user/' + selectUser.emproyee_no
+        asyncGet(url)
+            .then((response) => {
+                setUserData(commit,response.user, response.ex);
+                commit('setEditFlag', true);
+                router.push('/edit')
+            })
+            .catch(response => {
+                console.log(response);
+                alert('ユーザ情報取得に失敗しました！');
+            });
+        console.log(selectUser, url)
+    },
+    selectUserDelete({commit}, selectData) {
+        const selectUser = selectData.user
+        const router = selectData.router
+        const url = 'user/' + selectUser.emproyee_no
+        asyncDelete(url)
+            .then((response) => {
+                if (response.result) {
+                    alert('ユーザ削除に成功しました')
+                    router.push('/')
+                } else {
+                    alert(response.message)
+                }
+
+            })
+            .catch(response => {
+                console.log(response);
+                alert('ユーザ情報取得に失敗しました！');
+            });
+        console.log(selectUser, url)
     }
 }
 /**
  * GETリクエスト
  * axiosを使用しGETリクエストを送信します。
- * @param endPoint
+ * @param url
  * @returns {Promise<any>}
  */
-function asyncRequest(endPoint) {
+function asyncGet(url) {
+    // url = baseUrl + url
     return new Promise((resolve, reject) => {
         axios
-            .get(endPoint)
+            .get(url)
             .then(response => {
                 if (response.status != 200) {
                     return reject(response);
@@ -78,13 +147,65 @@ function asyncRequest(endPoint) {
 /**
  * POSTリクエスト
  * axiosを使用しPOSTリクエストを送信します。
- * @param endPoint
+ * @param url
+ * @param formData
+ * @param header
  * @returns {Promise<any>}
  */
-function asyncSubmit(url, formData, header = null) {
+function asyncPost(url, formData, header = null) {
+    // url = baseUrl + url
     return new Promise((resolve, reject) => {
         axios
             .post(url, formData, header)
+            .then(response => {
+                if (response.status != 200) {
+                    return reject(response);
+                }
+                return resolve(response.data);
+            })
+            .catch(err => {
+                return reject(err);
+            });
+    });
+}
+
+/**
+ * PUTリクエスト
+ * axiosを使用しPUTリクエストを送信します。
+ * ※PHPはPUTメソッドのパラメータを受け取れないので、POSTで送る
+ *   変更処理なので、本来はPUTで送るのが正しい
+ * @param url
+ * @param formData
+ * @param header
+ * @returns {Promise<any>}
+ */
+function asyncPut(url, formData, header = null) {
+    // url = baseUrl + url
+    return new Promise((resolve, reject) => {
+        axios
+            .post(url, formData, header)
+            .then(response => {
+                if (response.status != 200) {
+                    return reject(response);
+                }
+                return resolve(response.data);
+            })
+            .catch(err => {
+                return reject(err);
+            });
+    });
+}
+/**
+ * DELETEリクエスト
+ * axiosを使用しDELETEリクエストを送信します。
+ * @param url
+ * @returns {Promise<any>}
+ */
+function asyncDelete(url) {
+    // url = baseUrl + url
+    return new Promise((resolve, reject) => {
+        axios
+            .delete(url)
             .then(response => {
                 if (response.status != 200) {
                     return reject(response);
@@ -124,7 +245,9 @@ function setUserData(commit, userData, exData) {
     // 実務経験情報をあるだけ設定
     let count = 1;
     exData.map(value => {
-        console.log(value.kind)
+        if (count > 1) {
+            commit('addWorkList')
+        }
         commit('setWorkList', {no: count, name: 'kind', value: value.kind });
         commit('setWorkList', {no: count, name: 'comment', value: value.comment });
         commit('setWorkList', {no: count, name: 'startYear', value: value.start_year });
@@ -149,7 +272,6 @@ function setUserData(commit, userData, exData) {
         commit('setWorkList', {no: count, name: 'fw', value: value.fw });
         commit('setWorkList', {no: count, name: 'tool', value: value.tool });
 
-        commit('addWorkList')
         count++;
     })
 

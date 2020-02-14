@@ -4,6 +4,7 @@ import Index from './components/pages/Index.vue'
 import NextPage from './components/pages/NextPage.vue'
 import LoginPage from './components/pages/LoginPage.vue'
 import ResumePage from './components/pages/ResumePage.vue'
+import UserListPage from './components/pages/UserListPage.vue'
 
 Vue.use(Router)
 
@@ -34,6 +35,11 @@ export default new Router({
       path: '/edit',
       name: 'edit',
       component: ResumePage
+    },
+    {
+      path: '/list',
+      name: 'list',
+      component: UserListPage
     }
   ]
 })

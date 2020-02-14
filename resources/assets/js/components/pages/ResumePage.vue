@@ -221,7 +221,6 @@ import InputCheckBox from '../atoms/InputCheckBox'
                 ],
                 adminSetting: [{
                     name: "管理者として登録する",
-                    checked: false,
                     setterName: "setAdminFlag",
                     checked: this.$store.state.adminFlag
                 }],
@@ -238,7 +237,7 @@ import InputCheckBox from '../atoms/InputCheckBox'
                 this.$store.commit('addWorkList')
             },
             submitData() {
-                this.$store.dispatch('submitUserData')
+                this.$store.dispatch('submitUserData', this.$router)
             }
         }
     }
