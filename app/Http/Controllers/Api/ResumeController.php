@@ -22,11 +22,34 @@ class ResumeController extends Controller
             $user = User::select()->where('emproyee_no', $id)->first();
         }
 
+        if(is_null($user)){
+            $user = collect(["error" => "ユーザが登録されていません。"]);
+        }
+
         return $user->toJson();
     }
 
     public function create(Request $request){
+        $user = new User();
 
+        $result = $user->create([
+            "emproyee_no" => $request->input("emproyee_no"),
+            "name" => $request->input("name"),
+            "name_kana" => $request->input("name_kana"),
+            "birthday" => $request->input("birthday"),
+            "gender" => $request->input("gender"),
+            "address" => $request->input("address"),
+            "country" => $request->input("country"),
+            "initial" => $request->input("initial"),
+            "education" => $request->input("education"),
+            "graduate" => $request->input("graduate"),
+            "station" => $request->input("station"),
+            "email" => $request->input("email"),
+            "qualifications" => $request->input("qualifications")
+
+        ]);
+
+        return $result->toJson();
     }
 
     public function update(Request $request){
